@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker images
-      run: docker-compose --file Source/docker-compose.yml --tag my-image-name:$(date +%s)
+      run: docker-compose --file Source/docker-compose.yml
       env:
         TAG: v1
         REGISTRY: $(acrRegistry)
