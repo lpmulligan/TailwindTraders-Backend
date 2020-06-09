@@ -15,11 +15,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker images
-      run: docker-compose --file Source/docker-compose.yml
+      run: |
+        cd ./Source
+        docker-compose --file docker-compose.yml build
       env:
         TAG: v1
-        REGISTRY: $(acrRegistry)
-    - name: Push the Docker images
-      run: docker-compose --file Source/docker-compose.yml push
+        REGISTRY: lpm10meus2acr
 
 
