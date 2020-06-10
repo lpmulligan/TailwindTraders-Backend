@@ -5,9 +5,9 @@ resources:
 - repo: self
 
 variables:
-  # subscription: ''
-  # acrName: ''
-  # resourceGroup: ''
+  subscription: 'azure-msdn-outlook-sub-sc'
+  acrName: 'lpm10meus2acr'
+  resourceGroup: 'lpm10-tailwindtrader-rg'
   deployfrom: 'Deploy'
 
 jobs:

@@ -63,13 +63,12 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     
-    - name: Push Images with SHA Tage
+    - name: Push Images with SHA Tag
       run: |
         # Push Images with SHA
         # Yellow Output
         echo -e "\033[0;33m---------------------------------------------------\033[0m"
-        echo -e "\033[0;33mUsing docker compose to pushing images.\033[0m"
-        echo -e "\033[0;33mImages will be named as <acrLoginServer>/<imageName>:<dockerTag>\033[0m"
+        echo -e "\033[0;33mUsing docker compose to push images.\033[0m"
         echo -e "\033[0;33m---------------------------------------------------\033[0m"
         docker-compose -f docker-compose.yml push
       working-directory: ./Source
@@ -83,8 +82,7 @@ jobs:
         # Push Images with latest
         # Yellow Output
         echo -e "\033[0;33m---------------------------------------------------\033[0m"
-        echo -e "\033[0;33mUsing docker compose to pushing images.\033[0m"
-        echo -e "\033[0;33mImages will be named as <acrLoginServer>/<imageName>:<dockerTag>\033[0m"
+        echo -e "\033[0;33mUsing docker compose to push images.\033[0m"
         echo -e "\033[0;33m---------------------------------------------------\033[0m"
         docker-compose -f docker-compose.yml push
       working-directory: ./Source
