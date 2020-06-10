@@ -24,7 +24,7 @@ jobs:
       # Need to do this since using docker-compose and need to set an ENVIRONMENT variable for tag
       run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
 
-    - name: Build Images
+    - name: Build Images with SHA Tag
       working-directory: ./Source
       run: |
         # Build Images
@@ -38,6 +38,22 @@ jobs:
       env:
           # Since using docker-compose and not docker need to set ENVIRONMENT variables for TAG and REGISTRY
           TAG: ${{ steps.slug.outputs.sha8 }}
+          REGISTRY: ${{env.registry}}
+
+    - name: Build Images with Latest Tag
+      working-directory: ./Source
+      run: |
+        # Build Images
+        # Yellow Output
+        echo -e "\033[0;33m---------------------------------------------------\033[0m"
+        echo -e "\033[0;33mUsing docker compose to build images.\033[0m"
+        echo -e "\033[0;33mImages will be named as <acrLoginServer>/<imageName>:<dockerTag>\033[0m"
+        echo -e "\033[0;33m---------------------------------------------------\033[0m"
+
+        docker-compose -f docker-compose.yml build
+      env:
+          # Since using docker-compose and not docker need to set ENVIRONMENT variables for TAG and REGISTRY
+          TAG: latest
           REGISTRY: ${{env.registry}}
 
     - name: ACR Login
@@ -61,5 +77,7 @@ jobs:
           # Since using docker-compose and not docker need to set ENVIRONMENT variables for TAG and REGISTRY
           TAG: ${{ steps.slug.outputs.sha8 }}
           REGISTRY: ${{env.registry}}
+
+
 
 
