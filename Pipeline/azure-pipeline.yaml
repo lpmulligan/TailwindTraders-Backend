@@ -7,7 +7,7 @@ resources:
 variables:
   subscription: 'azure-msdn-outlook-sub-sc'
   acrName: 'lpm10meus2acr'
-  resourceGroup: 'lpm10-tailwindtrader-rg'
+  resourceGroup: 'lpm10m-eus2-shared-services-rg'
   deployfrom: 'Deploy'
 
 jobs:
