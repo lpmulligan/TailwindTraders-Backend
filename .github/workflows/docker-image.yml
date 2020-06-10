@@ -22,7 +22,7 @@ jobs:
       run: |
         # Yellow Output
         echo -e "\033[0;33m---------------------------------------------------\033[0m"
-        echo -e "\033[0;33mUsing docker compose to build & tag images.\033[0m"
+        echo -e "\033[0;33mUsing docker compose to build images.\033[0m"
         echo -e "\033[0;33mImages will be named as $acrLoginServer/imageName:$dockerTag\033[0m"
         echo -e "\033[0;33m---------------------------------------------------\033[0m"
 
@@ -42,6 +42,7 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
         docker-compose -f docker-compose.yml push
+      working-directory: ./Source
       env:
           REGISTRY: lpm10meus2acr
 
