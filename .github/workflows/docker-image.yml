@@ -6,20 +6,51 @@ on:
   pull_request:
     branches: [ master ]
 
+
+
 jobs:
-
-  build:
-
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker images
-      run: |
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: lpm10meus2acr.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - run: |
+        YELLOW='\033[0;33m'
+        NC='\033[0m'
+        echo "${YELLOW}---------------------------------------------------"
+        echo "${YELLOW}Using docker compose to build & tag images."
+        echo "${YELLOW}Images will be named as $acrLoginServer/imageName:$dockerTag"
+        echo "${YELLOW}---------------------------------------------------"
         cd ./Source
         docker-compose --file docker-compose.yml build
-      env:
-        TAG: v1
-        REGISTRY: lpm10meus2acr
+        #docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
+        #docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
+        env:
+            TAG: ${{ github.sha }}
+            REGISTRY: lpm10meus2acr
+
+#    - uses: azure/login@v1
+#      with:
+#        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+#
+#    - name: Build the Docker images
+#      run: |
+#        cd ./Source
+#        docker-compose --file docker-compose.yml build
+#      env:
+#        TAG: v1
+#        REGISTRY: lpm10meus2acr
+
+
+#    - name: Azure logout
+#      run: |
+#        az logout
 
 
