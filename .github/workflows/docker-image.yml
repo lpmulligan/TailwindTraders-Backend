@@ -14,13 +14,8 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v2
-
-    - uses: azure/docker-login@v1
-      with:
-        login-server: lpm10meus2acr.azurecr.io
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - name: Checkout
+      uses: actions/checkout@v2
 
     - name: Build Images
       working-directory: ./Source
@@ -34,9 +29,19 @@ jobs:
         docker-compose --file docker-compose.yml build
         #docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
         #docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
-        docker-compose -f docker-compose.yml push
+        #docker-compose -f docker-compose.yml push
       env:
           TAG: ${{ github.sha }}
           REGISTRY: lpm10meus2acr
+
+    - name: Push Images
+      uses: azure/docker-login@v1
+      with:
+        login-server: lpm10meus2acr.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+      run: |
+        docker-compose -f docker-compose.yml push
+
 
 
