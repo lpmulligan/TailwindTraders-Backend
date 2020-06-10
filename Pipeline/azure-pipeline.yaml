@@ -5,7 +5,7 @@ resources:
 - repo: self
 
 variables:
-  subscription: 'azure-msdn-outlook-sub-sc'
+  subscription: 'azure-msdn-10m-sub-sc'
   acrName: 'lpm10meus2acr'
   resourceGroup: 'lpm10m-eus2-shared-services-rg'
   deployfrom: 'Deploy'
