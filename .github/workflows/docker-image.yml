@@ -21,13 +21,15 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
+    - name: Build Images
+      working-directory: ./Source
     - run: |
         # Yellow Output
         echo -e "\033[0;33m---------------------------------------------------\033[0m"
         echo -e "\033[0;33mUsing docker compose to build & tag images.\033[0m"
         echo -e "\033[0;33mImages will be named as $acrLoginServer/imageName:$dockerTag\033[0m"
         echo -e "\033[0;33m---------------------------------------------------\033[0m"
-        cd ./Source
+
         docker-compose --file docker-compose.yml build
         #docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
         #docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
