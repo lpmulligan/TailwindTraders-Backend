@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - uses: actions/checkout@v2
 
     - uses: azure/docker-login@v1
@@ -23,7 +24,7 @@ jobs:
 
     - name: Build Images
       working-directory: ./Source
-    - run: |
+      run: |
         # Yellow Output
         echo -e "\033[0;33m---------------------------------------------------\033[0m"
         echo -e "\033[0;33mUsing docker compose to build & tag images.\033[0m"
