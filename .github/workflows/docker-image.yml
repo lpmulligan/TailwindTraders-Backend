@@ -34,25 +34,9 @@ jobs:
         docker-compose --file docker-compose.yml build
         #docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
         #docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
-        env:
-            TAG: ${{ github.sha }}
-            REGISTRY: lpm10meus2acr
-
-#    - uses: azure/login@v1
-#      with:
-#        creds: '${{ secrets.AZURE_CREDENTIALS }}'
-#
-#    - name: Build the Docker images
-#      run: |
-#        cd ./Source
-#        docker-compose --file docker-compose.yml build
-#      env:
-#        TAG: v1
-#        REGISTRY: lpm10meus2acr
-
-
-#    - name: Azure logout
-#      run: |
-#        az logout
+        docker-compose -f docker-compose.yml push
+      env:
+          TAG: ${{ github.sha }}
+          REGISTRY: lpm10meus2acr
 
 
